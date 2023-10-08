@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "8c5e1d6f-e7ee-4fe3-a5dd-97273cd63acf",
+		"name": "Exercicio 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26872929"
+	},
+	"item": [
+		{
+			"name": "GET_ListarUsuarios",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const all_users = {\r",
+							"  url : 'https://jsonplaceholder.typicode.com/users',\r",
+							"  method : 'GET'\r",
+							"};\r",
+							"pm.sendRequest(all_users, function (err, response) {\r",
+							"    var data = response.json();\r",
+							"    for(var i = 0; i < data.length; i++){\r",
+							"        if(data[i].name == \"Patricia Lebsack\"){\r",
+							"            pm.environment.set(\"user\", data[i]);\r",
+							"            return;\r",
+							"        }\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Campos encontrados no corpo da mensagem de resposta\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"username\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"address\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"street\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"suite\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"city\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"zipcode\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"geo\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"lat\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"lng\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"phone\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"website\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"company\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"catchPhrase\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"bs\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"let ids = []\r",
+							"\r",
+							"_.each(pm.response.json(), (el) => ids.push(el.id))\r",
+							"\r",
+							"pm.environment.set(\"ids\", JSON.stringify(ids))\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{API_URL}}"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_ConsultarUsuarioByID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Campos encontrados no corpo da mensagem de resposta\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"username\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"address\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"street\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"suite\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"city\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"zipcode\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"geo\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"lat\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"lng\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"phone\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"website\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"company\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"catchPhrase\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"bs\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{API_URL}}/1"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_ConsultarComentariosUsuarioByID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Campos encontrados no corpo da mensagem de resposta\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"postId\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"email\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"body\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{API_URL}}/1/comments"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{API_URL}}/1"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Campos encontrados no corpo da mensagem de resposta\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "{{API_URL}}/10"
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Resposta OK e possui json no corpo\", function () {\r",
+							"\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Campos encontrados no corpo da mensagem de resposta\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando Codigo de Resposta OK especifico (201 - Criado)\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{API_URL}}"
+			},
+			"response": []
+		}
+	]
+}
